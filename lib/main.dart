@@ -1,31 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_app/question.dart';
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatefulWidget {
-
   @override
   _MyAppState createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
-  int questionIndex = 0;
+  int _questionIndex = 0;
   List<String> question = [
-      'What\'s your favorite color?',
-      'What\'s your favorite animal?',
-    ];
+    'What\'s your favorite color?',
+    'What\'s your favorite animal?',
+  ];
 
-  void answerQuestion(){
+  void answerQuestion() {
     setState(() {
-      questionIndex = (questionIndex == question.length-1) ? 0 : questionIndex+1;
-    });    
+      _questionIndex = (_questionIndex == question.length - 1) ? 0 : _questionIndex + 1;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-
-    
-
     return MaterialApp(
       title: 'Material App',
       debugShowCheckedModeBanner: false,
@@ -37,7 +34,7 @@ class _MyAppState extends State<MyApp> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Text(question[questionIndex]),
+                Question(question[_questionIndex]),
                 RaisedButton(
                   child: Text('Answer 1'),
                   onPressed: answerQuestion,
