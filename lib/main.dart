@@ -11,6 +11,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   int _questionIndex = 0;
+  bool _final = false;
   final question = const [
     {
       'questionText': 'What\'s your favorite color?',
@@ -20,12 +21,17 @@ class _MyAppState extends State<MyApp> {
       'questionText': 'What\'s your favorite animal?',
       'answers': ['Cat', 'Dog', 'Fish', 'Rabbit']
     },
-    
   ];
 
   void _answerQuestion({String prueba}) {
     setState(() {
-      _questionIndex = (_questionIndex == question.length - 1) ? 0 : _questionIndex + 1;
+      if (_questionIndex == question.length - 1) {
+        _questionIndex = 0;
+        _final = true;
+      } else {
+        _questionIndex++;
+        _final = false;
+      }
     });
   }
 
@@ -39,15 +45,18 @@ class _MyAppState extends State<MyApp> {
             title: Text('Material App Bar'),
           ),
           body: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Question(question[_questionIndex]['questionText']),
-                ...(question[_questionIndex]['answers'] as List<String> ).map((q) {
-                  return Answer(_answerQuestion, q);
-                }).toList(),              
-              ],
-            ),
+            child: !_final
+                ? Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Question(question[_questionIndex]['questionText']),
+                      ...(question[_questionIndex]['answers'] as List<String>)
+                          .map((q) {
+                        return Answer(_answerQuestion, q);
+                      }).toList(),
+                    ],
+                  )
+                : Text('You did it'),
           )),
     );
   }
