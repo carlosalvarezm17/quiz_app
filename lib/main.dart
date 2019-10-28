@@ -16,7 +16,8 @@ class _MyAppState extends State<MyApp> {
     'What\'s your favorite animal?',
   ];
 
-  void _answerQuestion() {
+  void _answerQuestion({String prueba}) {
+    print(prueba);
     setState(() {
       _questionIndex = (_questionIndex == question.length - 1) ? 0 : _questionIndex + 1;
     });
@@ -38,8 +39,7 @@ class _MyAppState extends State<MyApp> {
                 Question(question[_questionIndex]),
                 Answer(_answerQuestion),
                 Answer(_answerQuestion),
-                Answer(_answerQuestion),
-                
+                Answer(_answerQuestion),                
               ],
             ),
           )),
