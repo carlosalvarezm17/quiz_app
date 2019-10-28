@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_app/answer.dart';
 import 'package:quiz_app/question.dart';
 
 void main() => runApp(MyApp());
@@ -15,7 +16,7 @@ class _MyAppState extends State<MyApp> {
     'What\'s your favorite animal?',
   ];
 
-  void answerQuestion() {
+  void _answerQuestion() {
     setState(() {
       _questionIndex = (_questionIndex == question.length - 1) ? 0 : _questionIndex + 1;
     });
@@ -35,18 +36,10 @@ class _MyAppState extends State<MyApp> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Question(question[_questionIndex]),
-                RaisedButton(
-                  child: Text('Answer 1'),
-                  onPressed: answerQuestion,
-                ),
-                RaisedButton(
-                  child: Text('Answer 2'),
-                  onPressed: answerQuestion,
-                ),
-                RaisedButton(
-                  child: Text('Answer 3'),
-                  onPressed: answerQuestion,
-                ),
+                Answer(_answerQuestion),
+                Answer(_answerQuestion),
+                Answer(_answerQuestion),
+                
               ],
             ),
           )),
