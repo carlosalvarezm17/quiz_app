@@ -11,13 +11,19 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   int _questionIndex = 0;
-  List<String> question = [
-    'What\'s your favorite color?',
-    'What\'s your favorite animal?',
+  List question = [
+    {
+      'questionText': 'What\'s your favorite color?',
+      'answers': ['Black', 'Red', 'Green', 'White']
+    },
+    {
+      'questionText': 'What\'s your favorite animal?',
+      'answers': ['Cat', 'Dog', 'Fish', 'Rabbit']
+    },
+    
   ];
 
   void _answerQuestion({String prueba}) {
-    print(prueba);
     setState(() {
       _questionIndex = (_questionIndex == question.length - 1) ? 0 : _questionIndex + 1;
     });
@@ -36,10 +42,10 @@ class _MyAppState extends State<MyApp> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Question(question[_questionIndex]),
-                Answer(_answerQuestion),
-                Answer(_answerQuestion),
-                Answer(_answerQuestion),                
+                Question(question[_questionIndex]['questionText']),
+                ...(question[_questionIndex]['answers'] as List<String> ).map((q) {
+                  return Answer(_answerQuestion, q);
+                }).toList(),              
               ],
             ),
           )),
